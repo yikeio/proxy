@@ -1,0 +1,26 @@
+server {
+    listen 80;
+    listen [::]:80;
+    server_name _;
+
+    # security
+    include configs/security.conf;
+
+    # logging
+    access_log /var/log/nginx/access.log json;
+    error_log /var/log/nginx/error.log warn;
+
+    satisfy any;
+    allow $ALLOW_IPS;
+    deny all;
+
+    # reverse proxy
+    location / {
+        proxy_pass $PROXY_PASS;
+        proxy_buffering $PROXY_BUFFERING;
+        include configs/proxy.conf;
+    }
+
+    # additional config
+    include configs/general.conf;
+}
