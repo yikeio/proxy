@@ -6,6 +6,8 @@ ENV PROXY_BUFFERING=off \
 
 COPY . /etc/nginx/
 
+RUN chmod +x /etc/nginx/start.sh
+
 EXPOSE 80
 
-ENTRYPOINT ["/bin/sh", "/etc/nginx/start.sh"]
+ENTRYPOINT [ "/etc/nginx/start.sh" ]
