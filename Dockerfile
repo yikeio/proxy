@@ -6,8 +6,9 @@ ENV PROXY_BUFFERING=off \
 
 COPY . /etc/nginx/
 
-RUN openssl dhparam -out /etc/nginx/dhparam.pem 2048
+RUN openssl dhparam -out /etc/nginx/dhparam.pem 2048 \
+    && chmod +x /etc/nginx/start.sh
 
 EXPOSE 80 443
 
-ENTRYPOINT ["/bin/sh", "/etc/nginx/start.sh"]
+ENTRYPOINT [ "/etc/nginx/start.sh" ]

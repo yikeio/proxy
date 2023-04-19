@@ -14,9 +14,7 @@ server {
     access_log /var/log/nginx/access.log json;
     error_log /var/log/nginx/error.log warn;
 
-    satisfy any;
-    allow $ALLOW_IPS;
-    deny all;
+    include configs/whitelist.conf;
 
     # reverse proxy
     location / {
